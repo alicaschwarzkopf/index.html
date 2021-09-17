@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gewinn- und Erlösfunktion</title>
+</head>
+<script>
+    "use strict"
+    function programm() {
+		
+        var vPmenge;
+		var vAusgabe;
+		var vX=1000;
+		var vKosten;
+		var vVkosten;
+		var vFkosten;
+		var vSzahl;
+		var vGewinn;
+		var vErloese;
+        var vBEP;
+        var vSchwelle
+
+        vPmenge = parseFloat(document.getElementById("idPmenge").value);
+		vVkosten = parseFloat(document.getElementById("idKosten").value);
+		vFkosten = parseFloat(document.getElementById("idFkosten").value);
+        vSzahl = parseFloat(document.getElementById("idSzahl").value);
+		
+		
+		
+		vAusgabe = "";
+		
+        vAusgabe = vAusgabe + "<table border=1>";
+        vAusgabe = vAusgabe + "<tr><th>Menge</th><th>Kosten K(x)=kf + Kv * x</th><th>Erlös E(x)=p*x</th><th>Gewinn G(x)= E(x) - K(x)</th><th>Bemerkung</td></tr>";
+		
+		while (vX <=vPmenge) {
+			
+			vKosten = vFkosten + vVkosten * vX
+			vErloese = vSzahl * vX
+			vGewinn = vErloese - vKosten
+			
+			if (vGewinn<0) {
+			vAusgabe = vAusgabe + "<tr><td>" + vX + "</td><td>" + vKosten + "</td><td>" + vErloese + "</td><td style=color:red>" +vGewinn + "</td><td>" + "verlustzone" + "</td></tr>";
+				
+			} else {
+				
+				vAusgabe = vAusgabe + "<tr><td>" + vX + "</td><td>" + vKosten + "</td><td>" + vErloese + "</td><td>" + vGewinn + "</td><td>" +
+				"gewinnzone" + "</td><tr>";
+
+			}
+			
+			vX = vX + 1000;
+			
+			
+
+    }
+    vAusgabe = vAusgabe + "</table>";
+		
+    vBEP = vFkosten/(vSzahl - vVkosten);
+    vSchwelle = vBEP * vSzahl;
+
+    vAusgabe=vAusgabe + "Break-Even-Point:  " + vBEP + "Stück <br>";
+    vAusgabe=vAusgabe + "Gewinnschwelle:" + vSchwelle + "€"; 
+
+
+        document.getElementById("idAusgabe").innerHTML= vAusgabe;
+		}
+</script>
+<body>
+    <h1>Gewinn- und Erlösfunktion</h1>
+		
+		Kosten-Variabel(k): x läuft von 1 bis <input id="idKosten" type="text" value="4.50">    
+	
+        Kosten-Fix: <input id="idFkosten" type="text" value="12800"><br><br>
+	
+		Produktionsmenge(x): <input id="idPmenge" type="text" value="20000">
+	
+       	Stückpreis(p): <input id="idSzahl" type="text" value="6.00"></br>
+
+       <button onClick="programm();">Kostentabelle!</button><br><br>
+       <div id="idAusgabe"></div>
+</body>
+</html>
